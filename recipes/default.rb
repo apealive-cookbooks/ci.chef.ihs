@@ -1,3 +1,9 @@
+=begin
+#<
+This recipe calls IIM and uses it to install IHS
+#>
+=end
+
 # Cookbook Name:: ihs
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
