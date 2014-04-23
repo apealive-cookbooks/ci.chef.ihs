@@ -35,6 +35,8 @@ end
 template responseFilePath do
    source "install_response_file.xml.erb"
    action :create
+   group node[:im][:group]
+   owner node[:im][:user]
    #all variables are set in the erb itself.
 end    
     
