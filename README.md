@@ -35,20 +35,6 @@ This cookbook also supports keyfiles, however keyfiles are depreciated and we do
 * `node[:ihs][:install][:repositoryLocation]` - The location of the repository to download IHS from, this attribute is REQUIRED. Defaults to `"nil"`.
 * `node[:ihs][:install][:masterPasswordFile]` - The location of the master password file IIM should use to access the secure storage file, this attribute is optional. Defaults to `"nil"`.
 * `node[:ihs][:install][:secureStorageFile]` - The location of the secure storage file IIM should use to access the repoistory, this attribute is optional. Defaults to `"nil"`.
-* `node[:Robin_Config][:frontEnd][:IHS][:baseDir]` - Where to find the front end IBM HTTP Server. If left to nil then this will fall back to [:ihs][:paths][:install]. If you wish to run configihs One of the two variables __must__ be set. Defaults to `"nil"`.
-* `node[:Robin_Config][:frontEnd][:IHS][:pluginBaseDir]` - Where to find the Web Server Plug-ins for IBM WebSphere Application Server V8.5. If left to nil then this will fall back to [:ihs][:paths][:plugins]. If you wish to run configihs one of the two variables __must__ be set. Defaults to `"nil"`.
-* `node[:Robin_Config][:backEnd][:java][:toolsPath]` - The location of tools.jar on the liberty servers, this is needed to generate plugin-cfg.xml. As an alternative you can put a copy of tools.jar into the DMZIHSLiberty/files/defualt directory and leave this peramater as nil. Defaults to `"nil"`.
-* `node[:Robin_Config]["backEnd"]["findGateway"]["pattern"]` - How the liberty servers should search for the front end IBM HTTP Server. This must be set on the back end. TODO, examples would be good here. Defaults to `"nil"`.
-* `node[:Robin_Config]["backEnd"]["findGateway"]["networkInterface"]` -  Defaults to `"eth0"`.
-* `node[:Robin_Config][:frontEnd][:IHS][:install][:responseFile]` - The reponse file and optionally a secure storage file for install manager to install IHS. Defaults to `"nil"`.
-* `node[:Robin_Config][:frontEnd][:IHS][:install][:secureStorageFile]` -  Defaults to `"nil"`.
-* `node[:Robin_Config][:backEnd][:SSH][:username]` - The back end liberty servers require the ability to SSH to the front end. !Warning, this recipy can use SSH usernames and passwords, this is NOT recommended. Defaults to `"nil"`.
-* `node[:Robin_Config][:backEnd][:SSH][:password]` -  Defaults to `"nil"`.
-* `node[:Robin_Config][:backEnd][:SSH][:supressUnkownHostsWarning]` -  Defaults to `"true"`.
-* `node[:Robin_Config][:backEnd][:SSH][:override]` -  Defaults to `"nil # if not nil, a custom SSH string will be used."`.
-* `node[:Robin_Config][:frontEnd][:plugincfg][:logPath]` - Peramaters to override settings in the final config-xml these should be set on the front end server. Defaults to `"nil"`.
-* `node[:Robin_Config][:frontEnd][:plugincfg][:hostname]` -  Defaults to `"*"`.
-* `node[:Robin_Config][:frontEnd][:plugincfg][:ports]` -  Defaults to `"[ ... ]"`.
 * `node[:Robin_Config][:backEnd][:java][:toolsPath]` - The location of tools.jar on the liberty servers, this is needed to generate plugin-cfg.xml. As an alternative you can put a copy of tools.jar into the DMZIHSLiberty/files/defualt directory and leave this peramater as nil. Defaults to `"nil"`.
 * `node[:Robin_Config]["backEnd"]["findGateway"]["pattern"]` - How the liberty servers should search for the front end IBM HTTP Server. This must be set on the back end. TODO, examples would be good here. Defaults to `"nil"`.
 * `node[:Robin_Config]["backEnd"]["findGateway"]["networkInterface"]` -  Defaults to `"eth0"`.
