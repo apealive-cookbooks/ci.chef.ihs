@@ -10,7 +10,8 @@ default[:ihs][:paths][:plugins] = "/opt/IBM/WebSphere/Plugins"
 default[:ihs][:settings][:arch] = "x86"
 #<> The port for IHS 
 default[:ihs][:settings][:port] = "80"
-
+#<> Install a 64 or 32 bit version? Defaults to checking automatically. 
+default[:ihs][:install][":bits"] = ""
 
 #<> The location of the repository to download IHS from, this attribute is REQUIRED
 default[:ihs][:install][:repositoryLocation] = nil
@@ -18,7 +19,3 @@ default[:ihs][:install][:repositoryLocation] = nil
 default[:ihs][:install][:masterPasswordFile] = nil
 #<> The location of the secure storage file IIM should use to access the repoistory, this attribute is optional
 default[:ihs][:install][:secureStorageFile] = nil
-#<> The location of the key file IIM should use to access the repoistory, this attribute is optional
-default[:ihs][:install][:keyFile] = nil
-#<> The location of the response file IIM should use to install the key file, this attribute is optional
-default[:ihs][:install][:keyResponseFile] = nil

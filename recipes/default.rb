@@ -22,6 +22,14 @@ require 'tempfile'
 
 include_recipe "iim"
 
+
+bits = %x(uname -m | grep -o "^[^_]*" | sed -e 's/i6/i3/g')
+if bits.start_with?('x') #as in x86_64
+  node.default[:ihs][:install][":bits"] = '64'
+elsif bits.start_with?('i') #as in i386 or i686
+  node.default[:ihs][:install][":bits"] = '32'
+end
+
 responseFile = Tempfile.new('response.xml')
 responseFilePath = responseFile.path
 
@@ -38,15 +46,31 @@ template responseFilePath do
    group node[:im][:group]
    owner node[:im][:user]
    #all variables are set in the erb itself.
-end    
-    
+end        
 
 iim_iim 'ihs' do 
    response_file responseFilePath
    master_password_file node[:ihs][:install][:masterPasswordFile] #all these default to null, and depending on your repositories security settings they might be able to remain that way. 
    secure_storage_file node[:ihs][:install][:secureStorageFile]
-   key_file node[:ihs][:install][:keyFile]
-   key_response_file node[:ihs][:install][:keyResponseFile]
    action :install
+end
+
+
+template "/etc/init.d/IBM-http.sh" do
+   source "IBM-http.sh.erb"
+   action :create
+   group node[:im][:group]
+   owner node[:im][:user]
+   mode "0755" 
+   action :create_if_missing
+   #all variables are set in the erb itself.
+end   
+
+link "/etc/rc2.d/S91ibm-http" do
+  to "/etc/init.d/IBM-http.sh"
+end
+
+link "/etc/rc2.d/K15ibm-http" do
+  to "/etc/init.d/IBM-http.sh"
 end
 
