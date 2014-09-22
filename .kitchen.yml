@@ -1,0 +1,69 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  - name: ubuntu-12.04
+  - name: centos-6.4
+
+suites:
+  - name: default
+    run_list:
+      - recipe[ihs::default]
+    attributes: { "java": {
+      "install_flavor": "ibm",
+      "ibm": {
+        "url": "file:///vagrant/ibm-java-i386-sdk-7.1-1.1.bin",
+        "accept_ibm_download_terms": "true"
+      }
+    },
+    "Robin_Config": {
+      "backEnd": {
+        "SSH": {
+          "username": "vagrant",
+          "password": "vagrant"
+        },
+        "findGateway": {
+          "pattern": "hostname:tes",
+          "networkInterface": "eth0"
+        }
+      },
+      "frontEnd": {
+        "plugincfg": {
+          "ports": [
+            "80",
+            "443",
+            "9095"
+          ]
+        }
+      }
+    },
+    "wlp": {
+      "archive": {
+        "accept_license": "true",
+        "base_url": "file:///vagrant/"
+      }
+    },
+    "im": {
+      "user": "root",
+      "group": "root",
+      "install_zip": {
+        "file": "/vagrant/IBMIM_linux_x86.zip"
+      }
+    },
+    "ihs": {
+      "install": {
+        "repositoryLocation": "http://www.ibm.com/software/repositorymanager/V85WASIHSILAN",
+        "secureStorageFile": "/vagrant/secure_storage"
+      },
+    "java": {
+        "install_flavor": "ibm",
+        "ibm": {
+          "url": "file:///vagrant/ibm-java-i386-sdk-7.1-0.0.bin",
+          "accept_ibm_download_terms": "true"
+        }
+      }
+   }
