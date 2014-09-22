@@ -12,7 +12,13 @@ platforms:
 suites:
   - name: default
     run_list:
+      - recipe[apt]
+      - recipe[java]
+      - recipe[iim]
       - recipe[ihs::default]
+      - recipe[ihs::robin_collect]
+      - recipe[ihs::robin_config]
+      - recipe[minitest-handler]
     attributes: { 
     "Robin_Config": {
       "backEnd": {
