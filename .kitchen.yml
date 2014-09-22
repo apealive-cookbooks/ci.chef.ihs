@@ -13,13 +13,7 @@ suites:
   - name: default
     run_list:
       - recipe[ihs::default]
-    attributes: { "java": {
-      "install_flavor": "ibm",
-      "ibm": {
-        "url": "file:///vagrant/ibm-java-i386-sdk-7.1-1.1.bin",
-        "accept_ibm_download_terms": "true"
-      }
-    },
+    attributes: { 
     "Robin_Config": {
       "backEnd": {
         "SSH": {
