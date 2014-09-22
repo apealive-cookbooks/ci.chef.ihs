@@ -2,7 +2,7 @@
 #<> The location of tools.jar on the liberty servers, this is needed to generate plugin-cfg.xml. As an alternative you can put a copy of tools.jar into the DMZIHSLiberty/files/defualt directory and leave this peramater as nil. 
 default[:Robin_Config][:backEnd][:java][:toolsPath] = nil
 
-#<> How the liberty servers should search for the front end IBM HTTP Server. This must be set on the back end. TODO, examples would be good here
+#<> How the liberty servers should search for the front end IBM HTTP Server. This must be set on the back end. Examples of valid values for pattern: "hostname:<name>", "name:<chef-node-name>", "role:<chef-role>". If multiple results are returned this recipe will send the plugin-cfg.xml files to all of them. For more details see: https://docs.getchef.com/essentials_search.html#partial-search
 default[:Robin_Config]["backEnd"]["findGateway"]["pattern"] = nil
 default[:Robin_Config]["backEnd"]["findGateway"]["networkInterface"] = "eth0"
 
