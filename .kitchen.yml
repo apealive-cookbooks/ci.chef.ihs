@@ -1,4 +1,3 @@
----
 driver:
   name: vagrant
 
@@ -8,8 +7,10 @@ provisioner:
 platforms:
   - name: ubuntu-12.04
     driver:
-    box: opscode-ubuntu-12.04
-    box_url: https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04-i386_provisionerless.box
+      box: Debian-7.3-x86-vbox-chef
+      box_url: http://files.samurailink3.com/Debian-7.3-x86-vbox-chef.box
+      synced_folders:
+        - ["/tmp", "/vagrant"]
 
 suites:
   - name: default
@@ -22,35 +23,34 @@ suites:
       - recipe[ihs::robin_config]
       - recipe[minitest-handler]
     attributes:  
-    Robin_Config: 
-      backEnd: 
-        SSH: 
-          username: vagrant
-          password: vagrant
-        findGateway: 
-          pattern: hostname:tes
-          networkInterface: eth0
-      frontEnd: 
-        plugincfg: 
-          ports: [80, 443, 9095]
-    wlp: 
-      archive: 
-        accept_license: true
-        base_url: file:///vagrant/
-    im: 
-      user: root
-      group: root
-      install_zip: 
-        file: /vagrant/IBMIM_linux_x86.zip
-    ihs: 
-      install: 
-        repositoryLocation: http://www.ibm.com/software/repositorymanager/V85WASIHSILAN
-        secureStorageFile: /vagrant/secure_storage      
-    java: 
-        install_flavor: ibm
+      Robin_Config: 
+        backEnd: 
+          SSH: 
+            username: "vagrant"
+            password: "vagrant"
+          findGateway: 
+            overrideIP: ["10.0.2.15"]
+        frontEnd: 
+          plugincfg: 
+            ports: 
+              - "80"
+              - "443"
+              - "9095"
+      wlp: 
+        archive: 
+          accept_license: "true"
+          base_url: "file:///vagrant/"
+      im: 
+        user: "root"
+        group: "root"
+        install_zip: 
+          file: "/vagrant/IBMIM_linux_x86.zip"
+      ihs: 
+        install: 
+          repositoryLocation: "http://www.ibm.com/software/repositorymanager/V85WASIHSILAN"
+          secureStorageFile: "/vagrant/secure_storage"
+      java: 
+        install_flavor: "ibm"
         ibm: 
-          url: file:///vagrant/ibm-java-i386-sdk-7.1-0.0.bin
-          accept_ibm_download_terms: true
-        
-      
-   
+          url: "file:///vagrant/ibm-java-i386-sdk-7.1-0.0.bin"
+          accept_ibm_download_terms: "true"
