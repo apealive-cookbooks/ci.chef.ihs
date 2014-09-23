@@ -131,9 +131,12 @@ end
       frontEndInterface = node[:Robin_Config][:backEnd][:findGateway][:networkInterface]
       frontEndServers = search(:node, frontEndSearchPattern)
 
-
-      frontEndServers.each do |frontEndServer|              #this one should not start with a :
-         frontEndIPs <<  frontEndServer["network"]["interfaces"][frontEndInterface]["addresses"].select{|address, data| data["family"] == "inet"}.keys[0]    
+      if not  node[:Robin_Config][:backEnd][:findGateway][:overrideIP].nil? 
+         frontEndIPs
+      else
+         frontEndServers.each do |frontEndServer|              #this one should not start with a :
+           frontEndIPs <<  frontEndServer["network"]["interfaces"][frontEndInterface]["addresses"].select{|address, data| data["family"] == "inet"}.keys[0]    
+         end
       end
 
 

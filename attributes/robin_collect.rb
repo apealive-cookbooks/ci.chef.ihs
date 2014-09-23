@@ -6,6 +6,9 @@ default[:Robin_Config][:backEnd][:java][:toolsPath] = nil
 default[:Robin_Config]["backEnd"]["findGateway"]["pattern"] = nil
 default[:Robin_Config]["backEnd"]["findGateway"]["networkInterface"] = "eth0"
 
+#<> If this is set Chef will use the IPs provided instead of searching for the servers. This value takes an array of ips.
+default[:Robin_Config][:backEnd][:findGateway][:overrideIP] = nil
+
 
 #<> The back end liberty servers require the ability to SSH to the front end. !Warning, this recipy can use SSH usernames and passwords, this is NOT recommended. 
 
