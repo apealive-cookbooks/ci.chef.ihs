@@ -15,13 +15,8 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[apt]
-      - recipe[java]
-      - recipe[iim]
-      - recipe[ihs::default]
-      - recipe[ihs::robin_collect]
-      - recipe[ihs::robin_config]
       - recipe[minitest-handler]
+      - recipe[robin_test::install]
     attributes:  
       Robin_Config: 
         backEnd: 
@@ -29,7 +24,8 @@ suites:
             username: "vagrant"
             password: "vagrant"
           findGateway: 
-            overrideIP: ["10.0.2.15"]
+            overrideIP: 
+              - "10.0.2.15"
         frontEnd: 
           plugincfg: 
             ports: 
@@ -40,6 +36,10 @@ suites:
         archive: 
           accept_license: "true"
           base_url: "file:///vagrant/"
+          runtime:
+            url: "file:///vagrant/wlp-developers-runtime-8.5.5.3.jar"
+          extended:
+            url: "file:///vagrant/wlp-developers-extended-8.5.5.3.jar"
       im: 
         user: "root"
         group: "root"

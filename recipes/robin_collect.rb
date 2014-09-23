@@ -127,14 +127,14 @@ end
 
       frontEndIPs = []
 
-      frontEndSearchPattern = node[:Robin_Config][:backEnd][:findGateway][:pattern]
-      frontEndInterface = node[:Robin_Config][:backEnd][:findGateway][:networkInterface]
-      frontEndServers = search(:node, frontEndSearchPattern)
-
-      if not  node[:Robin_Config][:backEnd][:findGateway][:overrideIP].nil? 
-         frontEndIPs
+      if not node[:Robin_Config][:backEnd][:findGateway][:overrideIP].nil? 
+         frontEndIPs = node[:Robin_Config][:backEnd][:findGateway][:overrideIP]
       else
-         frontEndServers.each do |frontEndServer|              #this one should not start with a :
+
+         frontEndSearchPattern = node[:Robin_Config][:backEnd][:findGateway][:pattern]
+         frontEndInterface = node[:Robin_Config][:backEnd][:findGateway][:networkInterface]
+         frontEndServers = search(:node, frontEndSearchPattern)
+	 frontEndServers.each do |frontEndServer|              #this one should not start with a :
            frontEndIPs <<  frontEndServer["network"]["interfaces"][frontEndInterface]["addresses"].select{|address, data| data["family"] == "inet"}.keys[0]    
          end
       end

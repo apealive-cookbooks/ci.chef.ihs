@@ -17,7 +17,6 @@
 
 #Step one, install prerequisites: 
 
-include_attribute "robin_test::setup_attributes"
 
 include_recipe "apt"
 include_recipe "java"
