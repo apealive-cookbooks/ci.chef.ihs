@@ -46,7 +46,7 @@ directory "#{node['wlp']['base_dir']}/wlp/usr/servers/testone/dropins/test.war" 
    recursive true
 end
 
-cookbook_file "#{node['wlp']['base_dir']}/wlp/usr/servers/testone/dropins/test.war/test.jsp" do
+cookbook_file "#{node['wlp']['base_dir']}/wlp/usr/servers/testone/dropins/test.war/testone.jsp" do
   backup false
   source "testone.jsp"
   action :create_if_missing
@@ -77,7 +77,7 @@ directory "#{node['wlp']['base_dir']}/wlp/usr/servers/testtwo/dropins/test.war" 
    recursive true
 end
 
-cookbook_file "#{node['wlp']['base_dir']}/wlp/usr/servers/testtwo/dropins/test.war/test.jsp" do
+cookbook_file "#{node['wlp']['base_dir']}/wlp/usr/servers/testtwo/dropins/test.war/testtwo.jsp" do
   backup false
   source "testtwo.jsp"
   action :create_if_missing
@@ -98,3 +98,24 @@ include_recipe "ihs::robin_collect"
 include_recipe "ihs::robin_config"
 
 
+#Step five, download some pages to /tmp so that you can test for their existance later. 
+
+#in my experience it suceeds twice then fails twice - since I have been bad and made round robin urls that only work on one server
+bash "download from server one through the proxy" do
+  user "root"
+  ignore_failure true
+  cwd "/tmp"
+  code <<-EOH
+  wget localhost/test/testone.jsp || wget localhost/test/testone.jsp || wget localhost/test/testone.jsp || wget localhost/test/testone.jsp || wget localhost/test/testone.jsp || wget localhost/test/testone.jsp || wget localhost/test/testone.jsp || wget localhost/test/testone.jsp || wget localhost/test/testone.jsp || wget localhost/test/testone.jsp
+  EOH
+end
+
+
+bash "download from server two through the proxy" do
+  user "root"
+  ignore_failure true
+  cwd "/tmp"
+  code <<-EOH
+  wget localhost/test/testtwo.jsp || wget localhost/test/testtwo.jsp || wget localhost/test/testtwo.jsp || wget localhost/test/testtwo.jsp || wget localhost/test/testtwo.jsp || wget localhost/test/testtwo.jsp || wget localhost/test/testtwo.jsp || wget localhost/test/testtwo.jsp || wget localhost/test/testtwo.jsp || wget localhost/test/testtwo.jsp
+  EOH
+end 
