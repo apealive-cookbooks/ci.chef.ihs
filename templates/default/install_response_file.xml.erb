@@ -20,7 +20,7 @@
   </profile>
   <install modify='false'>
     <!-- IBM HTTP Server for WebSphere Application Server (ILAN) 8.5.5.1 -->
-    <offering profile='IBM HTTP Server V8.5' id='com.ibm.websphere.IHSILAN.v85' version='8.5.5001.20131018_2242' features='core.feature,arch.<%= node[:ihs][:install][":bits"] %>bit' installFixes='none'/>
+    <offering profile='IBM HTTP Server V8.5' id='com.ibm.websphere.IHSILAN.v85' '<%= node[:ihs][:install][:versionString] %>' features='core.feature,arch.<%= node[:ihs][:install][":bits"] %>bit' installFixes='none'/>
   </install>
   <profile id='Web Server Plug-ins for IBM WebSphere Application Server V8.5' installLocation='<%= node[:ihs][:paths][:plugins] %>'>
     <data key='eclipseLocation' value='<%= node[:ihs][:paths][:plugins] %>'/>
@@ -33,7 +33,7 @@
   </profile>
   <install modify='false'>
     <!-- Web Server Plug-ins for IBM WebSphere Application Server (ILAN) 8.5.5.1 -->
-    <offering profile='Web Server Plug-ins for IBM WebSphere Application Server V8.5' id='com.ibm.websphere.PLGILAN.v85' version='8.5.5001.20131018_2242' features='core.feature,com.ibm.jre.6_<%= node[:ihs][:install][":bits"] %>bit' installFixes='none'/>
+    <offering profile='Web Server Plug-ins for IBM WebSphere Application Server V8.5' id='com.ibm.websphere.PLGILAN.v85' '<%= node[:ihs][:install][:versionString] %>' features='core.feature,com.ibm.jre.6_<%= node[:ihs][:install][":bits"] %>bit' installFixes='none'/>
   </install>
   <preference name='com.ibm.cic.common.core.preferences.eclipseCache' value='${sharedLocation}'/>
   <preference name='com.ibm.cic.common.core.preferences.connectTimeout' value='30'/>
