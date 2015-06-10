@@ -19,5 +19,5 @@ default[:ihs][:install][:repositoryLocation] = nil
 default[:ihs][:install][:masterPasswordFile] = nil
 #<> The location of the secure storage file IIM should use to access the repoistory, this attribute is optional
 default[:ihs][:install][:secureStorageFile] = nil
-#<> The version to install. If left as nil it will default to the latest available version. Must be in the following format: version='VERSION_NUMBER'
-default[:ihs][:install][:versionString] = nil
+#<> The version to install. If left as an empty string it will default to the latest available version. Must be in the following format: version='VERSION_NUMBER'
+default[:ihs][:install][:versionString] = ""
