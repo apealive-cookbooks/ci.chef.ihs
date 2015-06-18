@@ -55,22 +55,16 @@ iim_iim 'ihs' do
    action :install
 end
 
-
-template "/etc/init.d/IBM-http.sh" do
+template "/etc/init.d/ibm-http" do
    source "IBM-http.sh.erb"
-   action :create
-   group node[:im][:group]
-   owner node[:im][:user]
-   mode "0755" 
-   action :create_if_missing
-   #all variables are set in the erb itself.
-end   
-
-link "/etc/rc2.d/S91ibm-http" do
-  to "/etc/init.d/IBM-http.sh"
+   group "root"
+   owner "root"
+   mode "0755"
 end
 
-link "/etc/rc2.d/K15ibm-http" do
-  to "/etc/init.d/IBM-http.sh"
+service "ibm-http" do
+  supports :restart => true, :reload => true
+  action [ :enable ]
+  provider Chef::Provide::Service:AixInit if platform?('aix')
 end
 

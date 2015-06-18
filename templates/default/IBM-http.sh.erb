@@ -1,39 +1,32 @@
 #!/bin/bash
-# SERVICENAME should match this filename
-SERVICENAME=$(basename $0)
-LOCKFILE="/var/lock/subsys/${SERVICENAME}"
-APACHECTL=<%= node[:ihs][:paths][:install] %>/bin/apachectl
 
-# The next lines are for chkconfig on RedHat systems.
-# chkconfig: 2345 98 02
-# description: Starts and stops IHS 
-
-# The next lines are for chkconfig on SuSE systems.
 ### BEGIN INIT INFO
-# Provides: IHS_61.1
-# Required-Start: $network $syslog
-# Required-Stop:
-# Default-Start: 2 3 4 5
-# Default-Stop: 0 6
-# Short-Description: Starts and stops IHS
-# Description: Starts and stops IHS
+# Provides:          ibm-http
+# Required-Start:    $local_fs $remote_fs $network $syslog
+# Required-Stop:     $local_fs $remote_fs $network $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start/Stop IBM HTTP Server
 ### END INIT INFO
 
+SERVICENAME=$(basename $0)
+APACHECTL=<%= node[:ihs][:paths][:install] %>/bin/apachectl
 
 case "$1" in
-  start)
-    touch $LOCKFILE 
+  start|stop|restart)
+    CMD=$1
     ;;
 
-  stop)
-    rm -f $LOCKFILE
+  reload)
+    CMD=graceful
     ;;
 
   *)
-    echo "Usage: $0 {start|stop|status|restart}"
+    echo "Usage: $0 {start|stop|restart|reload}"
     exit 1
     ;;
 esac
 
-$APACHECTL "$@"
+shift
 
+$APACHECTL $CMD "$@"
